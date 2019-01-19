@@ -1,0 +1,12 @@
+<p>
+  manager works!
+</p>
+
+<p>Projects:</p>
+<ul class="projects">
+  <li *ngFor="let project of projects">
+    <span class="badge">{{project.id}}</span> {{project.name}} {{project.description}}
+  </li>
+</ul>
+
+<button (click)="getProjects()">Reload Projects</button>
