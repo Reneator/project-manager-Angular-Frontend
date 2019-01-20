@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ProjectService} from '../services/project.service';
-import {Project} from '../objects/project';
+import {ProjectService} from '../../services/project.service';
+import {Project} from '../../objects/project';
+import {MatTableDataSource} from '@angular/material';
 
 
 @Component({
@@ -11,7 +12,10 @@ import {Project} from '../objects/project';
 export class ManagerComponent implements OnInit {
 
   projects: Project[];
-  selectedProject = new Project();
+  selectedProject: Project;
+  displayedColumns: string[] = ['id', 'name', 'contractor', 'client'];
+  dataSource: MatTableDataSource<Project>;
+
 
   constructor(private projectService: ProjectService) {
   }
@@ -22,7 +26,10 @@ export class ManagerComponent implements OnInit {
 
   getProjects(): void {
 
-    this.projectService.getProjects().subscribe((projects: Project[]) => this.projects = projects);
+    this.projectService.getProjects().subscribe((projects: Project[]) => {
+      this.projects = projects;
+      this.dataSource = new MatTableDataSource(projects);
+    });
   }
 
   onSelect(select: Project): void {
@@ -43,4 +50,9 @@ export class ManagerComponent implements OnInit {
     });
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }
+

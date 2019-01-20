@@ -3,22 +3,24 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ManagerComponent} from './manager/manager.component';
-import {TechnologyComponent} from './technology/technology.component';
+import {ManagerComponent} from './components/manager/manager.component';
+import {TechnologyComponent} from './components/technology/technology.component';
 import {HttpClientModule} from '@angular/common/http';
-import {ProjectDetailsComponent} from './project-details/project-details.component';
+import {ProjectDetailsComponent} from './components/project-details/project-details.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { NavigationComponent } from './navigation/navigation.component';
-import { LayoutModule } from '@angular/cdk/layout';
+import {NavigationComponent} from './components/navigation/navigation.component';
+import {LayoutModule} from '@angular/cdk/layout';
 import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
+  MatButtonModule, MatFormField, MatFormFieldModule,
+  MatIconModule, MatInputModule,
   MatListModule,
-  MatTreeModule,
-  MatDialog
+  MatNativeDateModule,
+  MatSidenavModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTreeModule
 } from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,18 @@ import {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatTreeModule
+    MatTableModule,
+    FormsModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
-  exports: [HttpClientModule
-  ],
+  entryComponents: [ManagerComponent],
+  exports: [HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, ManagerComponent]
 })
 export class AppModule {
 }
