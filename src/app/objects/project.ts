@@ -4,4 +4,9 @@ export class Project {
   description: string;
   contractor: string;
   client: string;
+
+
+  toString(): string {
+    return   'name: ' + name;
+  }
 }

@@ -17,16 +17,19 @@ export class ProjectService {
   }
 
   createProject(selectedProject: Project): Observable<Project> {
+    console.log('Creating Project:' + selectedProject.toString());
     return this.http.post<Project>(this.endpoint, selectedProject);
   }
 
   saveProject(selectedProject: Project): Observable<Project> {
+    console.log('Saving Project:' + selectedProject.toString());
     return this.http.put<Project>(this.endpoint, selectedProject);
   }
 
   getProjectById(project: Project) {
-    const params = new HttpParams();
-    params.append('id', project.id.toString());
-    return this.http.get<Project>(this.endpoint, {params: params});
+    // const params = new HttpParams();
+    // params.append('id', project.id.toString());
+    console.log('Getting Project with ID: ' + project.id.toString());
+    return this.http.get<Project>(this.endpoint + '?id=' + project.id.toString());
   }
 }

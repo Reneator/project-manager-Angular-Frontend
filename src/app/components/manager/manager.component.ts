@@ -58,25 +58,38 @@ export class ManagerComponent implements OnInit {
   }
 
   onSelect(project: Project): void {
-    this.selectedProject = project;
+    this.selectedProject =  project;
     console.log(project);
     this.opened = true;
   }
 
   SaveOrUpdateProject(selectedProject: Project) {
-    this.projectService.getProjectById(selectedProject).subscribe(
-      (project: Project) => {
-        console.log('successfully gotten' + project.id);
-        if (project === null) {
-          this.projectService.createProject(selectedProject).subscribe(() => {
-            this.getProjects();
-          });
-        } else {
-          this.projectService.saveProject(selectedProject).subscribe(() => {
-            this.getProjects();
-          });
-        }
-      });
+    console.log(selectedProject);
+    if (selectedProject.id == null) {
+      this.CreateProject(selectedProject);
+    } else {
+      this.projectService.getProjectById(selectedProject).subscribe(
+        (project: Project) => {
+          console.log('successfully gotten' + project.id);
+          if (project == null) {
+            this.CreateProject(selectedProject);
+          } else {
+            this.SaveProject(selectedProject);
+          }
+        });
+    }
+  }
+
+  SaveProject(project: Project) {
+    this.projectService.saveProject(project).subscribe(() => {
+      this.getProjects();
+    });
+  }
+
+  CreateProject(project: Project) {
+    this.projectService.createProject(project).subscribe(() => {
+      this.getProjects();
+    });
   }
 }
 
