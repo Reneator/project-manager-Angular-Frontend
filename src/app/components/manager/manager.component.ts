@@ -15,6 +15,7 @@ export class ManagerComponent implements OnInit {
   selectedProject: Project;
   displayedColumns: string[] = ['id', 'name', 'contractor', 'client'];
   dataSource: MatTableDataSource<Project>;
+  opened: boolean;
 
 
   constructor(private projectService: ProjectService) {
@@ -22,6 +23,7 @@ export class ManagerComponent implements OnInit {
 
   ngOnInit() {
     this.getProjects();
+    this.opened = false;
   }
 
   getProjects(): void {
@@ -30,10 +32,6 @@ export class ManagerComponent implements OnInit {
       this.projects = projects;
       this.dataSource = new MatTableDataSource(projects);
     });
-  }
-
-  onSelect(select: Project): void {
-    this.selectedProject = select;
   }
 
   createProject(selectedProject: Project) {
@@ -54,5 +52,31 @@ export class ManagerComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  openSideNav() {
+    this.selectedProject = new Project();
+    this.opened = true;
+  }
+
+  onSelect(project: Project): void {
+    this.selectedProject = project;
+    console.log(project);
+    this.opened = true;
+  }
+
+  SaveOrUpdateProject(selectedProject: Project) {
+    this.projectService.getProjectById(selectedProject).subscribe(
+      (project: Project) => {
+        console.log('successfully gotten' + project.id);
+        if (project === null) {
+          this.projectService.createProject(selectedProject).subscribe(() => {
+            this.getProjects();
+          });
+        } else {
+          this.projectService.saveProject(selectedProject).subscribe(() => {
+            this.getProjects();
+          });
+        }
+      });
+  }
 }
 

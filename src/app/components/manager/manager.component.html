@@ -1,48 +1,75 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav-content>
+    <p>Projects:</p>
+
+    <button mat-raised-button (click)="getProjects()">Reload Projects</button>
+
+    <button mat-raised-button (click)="openSideNav()">+</button>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="contractor">
+        <th mat-header-cell *matHeaderCellDef> Contractor</th>
+        <td mat-cell *matCellDef="let element"> {{element.contractor}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="client">
+        <th mat-header-cell *matHeaderCellDef> Client</th>
+        <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row (click)="onSelect(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </mat-sidenav-content>
+  <mat-sidenav position="end" #sidenav mode="over" [(opened)]="opened"
+  >
+
+    <div *ngIf="selectedProject">
+      <p>{{selectedProject.id}}</p>
+      {{selectedProject.name}}
+
+      <mat-form-field>
+        <input matInput [(ngModel)]="selectedProject.name" placeholder="Name">
+      </mat-form-field>
+      {{selectedProject.description}}
+      <mat-form-field>
+        <input matInput [(ngModel)]="selectedProject.description" placeholder="Description">
+      </mat-form-field>
+      {{selectedProject.contractor}}
+      <mat-form-field>
+        <input matInput [(ngModel)]="selectedProject.contractor" placeholder="Contractor">
+      </mat-form-field>
+      {{selectedProject.client}}
+      <mat-form-field>
+        <input matInput [(ngModel)]="selectedProject.client" placeholder="Client">
+      </mat-form-field>
+
+      <button mat-raised-button (click)="SaveOrUpdateProject(selectedProject)">Save</button>
 
 
-<p>Projects:</p>
-
-<button (click)="getProjects()">Reload Projects</button>
-
-<button (click)="openDialog()">+</button>
-
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> Id </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="contractor">
-    <th mat-header-cell *matHeaderCellDef> Contractor </th>
-    <td mat-cell *matCellDef="let element"> {{element.contractor}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="client">
-    <th mat-header-cell *matHeaderCellDef> Client </th>
-    <td mat-cell *matCellDef="let element"> {{element.client}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-
-
-<app-project-details>[project]="selectedProject</app-project-details>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

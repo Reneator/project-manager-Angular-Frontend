@@ -11,14 +11,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {
-  MatButtonModule, MatFormField, MatFormFieldModule,
-  MatIconModule, MatInputModule,
+  MatButtonModule, MatButtonToggleModule, MatCheckboxModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
   MatListModule,
   MatNativeDateModule,
   MatSidenavModule,
   MatTableModule,
-  MatToolbarModule,
-  MatTreeModule
+  MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -47,6 +48,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
   ],
   entryComponents: [ManagerComponent],
   exports: [HttpClientModule],
