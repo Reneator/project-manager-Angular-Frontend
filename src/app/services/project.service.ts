@@ -15,4 +15,12 @@ export class ProjectService {
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.endpoint + 'getAll');
   }
+
+  createProject(selectedProject: Project): Observable<Project> {
+    return this.http.post<Project>(this.endpoint, selectedProject);
+  }
+
+  saveProject(selectedProject: Project): Observable<Project> {
+    return this.http.put<Project>(this.endpoint, selectedProject);
+  }
 }
