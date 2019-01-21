@@ -49,20 +49,15 @@
 
     <div *ngIf="selectedProject">
       <p>{{selectedProject.id}}</p>
-      {{selectedProject.name}}
-
       <mat-form-field>
         <input matInput [(ngModel)]="selectedProject.name" placeholder="Name">
       </mat-form-field>
-      {{selectedProject.description}}
       <mat-form-field>
         <input matInput [(ngModel)]="selectedProject.description" placeholder="Description">
       </mat-form-field>
-      {{selectedProject.contractor}}
       <mat-form-field>
         <input matInput [(ngModel)]="selectedProject.contractor" placeholder="Contractor">
       </mat-form-field>
-      {{selectedProject.client}}
       <mat-form-field>
         <input matInput [(ngModel)]="selectedProject.client" placeholder="Client">
       </mat-form-field>
