@@ -32,4 +32,8 @@ export class ProjectService {
     console.log('Getting Project with ID: ' + project.id.toString());
     return this.http.get<Project>(this.endpoint + '?id=' + project.id.toString());
   }
+
+  deleteProject(project: Project) {
+    return this.http.delete<Project>(this.endpoint + '?id=' + project.id.toString());
+  }
 }

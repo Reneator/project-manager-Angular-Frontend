@@ -58,7 +58,7 @@ export class ManagerComponent implements OnInit {
   }
 
   onSelect(project: Project): void {
-    this.selectedProject =  project;
+    this.selectedProject =  Project.clone(project);
     console.log(project);
     this.opened = true;
   }
@@ -88,6 +88,12 @@ export class ManagerComponent implements OnInit {
 
   CreateProject(project: Project) {
     this.projectService.createProject(project).subscribe(() => {
+      this.getProjects();
+    });
+  }
+
+  DeleteProject(project: Project) {
+    this.projectService.deleteProject(project).subscribe(() => {
       this.getProjects();
     });
   }
